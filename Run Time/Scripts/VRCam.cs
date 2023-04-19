@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -14,17 +12,12 @@ namespace com.davidhopetech.phone.run_time.scripts
         {
             if (phone == null)
             {
-                var go = GameObject.Find("Phone");
-                if (go != null)
+                phone = GameObject.FindObjectOfType<Phone>();
+                
+                if (phone == null)
                 {
                     Debug.Log("Error: Phone not found");
                     return;
-                }
-
-                phone = go.GetComponent<Phone>();
-                if (phone == null)
-                {
-                    Debug.Log("Error: Phone Script not found");
                 }
             }
         }
@@ -34,7 +27,7 @@ namespace com.davidhopetech.phone.run_time.scripts
         {
             if (!Object.ReferenceEquals(phone, null))
             {
-                transform.rotation = phone.InvGyroAtt;
+                transform.rotation = phone.CalibratedGyroAttitude;
             }
         }
     }
